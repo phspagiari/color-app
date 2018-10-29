@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: color
+    process: web
+    product: spagiari
+  name: color-web
+  namespace: spagiari
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: color
+     process: web
+     product: spagiari
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+       app: color
+       process: web
+       product: spagiari
+    spec:
+      containers:
+      - name: color-web
+        env:
+        - name: API_ENDPOINT
+          value: "http://colorapi.private.qa.vivareal.io"
+        image: spagiari/color-app-web:latest
+        imagePullPolicy: Always

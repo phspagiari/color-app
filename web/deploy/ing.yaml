@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: private
+    kubernetes.io/tls-acme: "false"
+  name: colorweb
+  namespace: spagiari
+spec:
+  rules:
+  - host: colorweb.domain.com
+    http:
+      paths:
+      - backend:
+          serviceName: color-web
+          servicePort: 80
+        path: /
