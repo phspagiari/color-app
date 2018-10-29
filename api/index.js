@@ -5,6 +5,7 @@ var app_version = process.env.VERSION;
 var service_name = process.env.SERVICE;
 
 app.use(function(req, res, next) {
+  res.header("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();

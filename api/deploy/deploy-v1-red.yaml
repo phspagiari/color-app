@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: color
+    process: api
+    product: spagiari
+    color: red
+    version: v1
+  name: color-api-v1-red
+  namespace: spagiari
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: color
+      process: api
+      product: spagiari
+      color: red
+      version: v1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+       app: color
+       process: api
+       product: spagiari
+       color: red
+       version: v1
+    spec:
+      containers:
+      - image: spagiari/color-app-api:latest
+        imagePullPolicy: Always
+        name: color-api-v1-red
+        env:
+        - name: COLOR
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['color']
+        - name: VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['version']
+        - name: SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
