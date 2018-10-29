@@ -1,0 +1,21 @@
+body {
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    position: relative;
+    min-height: auto;
+    text-align: center;
+    color: #000;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+body .content {
+    box-sizing: border-box;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    padding: 100px 15px 70px;
+    text-align: center;
+}
