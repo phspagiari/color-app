@@ -30,6 +30,6 @@ spec:
       - name: color-web
         env:
         - name: API_ENDPOINT
-          value: "http://colorapi.private.qa.vivareal.io"
+          value: "http://colorapi.domain.com"
         image: spagiari/color-app-web:latest
         imagePullPolicy: Always
