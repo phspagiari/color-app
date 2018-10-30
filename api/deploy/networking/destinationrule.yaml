@@ -1,0 +1,56 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: colorapi
+  namespace: spagiari
+spec:
+  host: colorapi
+  trafficPolicy:
+    connectionPool:
+      http:
+        http1MaxPendingRequests: 1
+        maxRequestsPerConnection: 1
+      tcp:
+        maxConnections: 1
+    outlierDetection:
+      baseEjectionTime: 180.000s
+      consecutiveErrors: 1
+      interval: 1.000s
+      maxEjectionPercent: 100
+  subsets:
+  - name: "blue-v1"
+    labels:
+      version: v1
+      color: blue
+  - name: "blue-v2"
+    labels:
+      version: v2
+      color: blue
+  - name: "blue-v3"
+    labels:
+      version: v3
+      color: blue
+  - name: "green-v1"
+    labels:
+      version: v1
+      color: green
+  - name: "green-v2"
+    labels:
+      version: v2
+      color: green
+  - name: "green-v3"
+    labels:
+      version: v3
+      color: green
+  - name: "red-v1"
+    labels:
+      version: v1
+      color: red
+  - name: "red-v2"
+    labels:
+      version: v2
+      color: red
+  - name: "red-v3"
+    labels:
+      version: v3
+      color: red

@@ -1,0 +1,49 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: colorapi-gateway
+  namespace: spagiari
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - colorapi.domain.com
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: colorapi-root
+  namespace: spagiari
+spec:
+  hosts:
+  - colorapi.domain.com
+  gateways:
+  - colorapi-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: colorapi
+        port:
+          number: 3000
+        subset: "blue-v1"
+      weight: 35
+    - destination:
+        host: colorapi
+        port:
+          number: 3000
+        subset: "green-v2"
+      weight: 35
+    - destination:
+        host: colorapi
+        port:
+          number: 3000
+        subset: "red-v3"
+      weight: 30

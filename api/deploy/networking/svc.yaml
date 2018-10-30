@@ -1,19 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: color-api
+  name: colorapi
   namespace: spagiari
   labels:
-    app: color-api-v1-blue
+    app: colorapi
 spec:
   ports:
   - name: http
-    port: 80
+    port: 3000
     targetPort: 3000
   selector:
     app: color
     process: api
     product: spagiari
-    color: blue
-    version: v1
   type: ClusterIP

@@ -12,6 +12,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: color-api
-          servicePort: 80
+          serviceName: colorapi
+          servicePort: 3000
         path: /
